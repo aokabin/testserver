@@ -211,9 +211,9 @@ post '/make', provides: :json do
 
   # hash = {"family" => params["family"], "name" => params["name"], "rubi_family" => params["rubi_family"], "rubi_name" => params["rubi_name"], "school" => params["school"], "department" => params["department"], "mail" => params["mail"], "tel" => params["tel"], "pic" => params["pic"], "back" => params["back"]}
 
-  if !validate(hash) 
-    halt 400
-  end
+  # if !validate(hash) 
+  #   halt 400
+  # end
 
   input_data = JSON.parse request.body.read
 
