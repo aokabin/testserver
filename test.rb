@@ -120,7 +120,7 @@ def make_card (hash)
 
   surface = Cairo::ImageSurface.new(width, height)
   context = Cairo::Context.new(surface)
-  context.select_font_face("XXXXX")
+  context.select_font_face("07YasashisaGothic")
 
   # 白背景
   context.set_source_rgb(1, 1, 1)  # 色指定=白色
