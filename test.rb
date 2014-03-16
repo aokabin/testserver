@@ -1,9 +1,7 @@
 # coding: utf-8
 
 require "sinatra"
-require "mail"
 require "cairo"
-require "rmagick"
 require "json"
 require "base64"
 
