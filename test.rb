@@ -187,7 +187,7 @@ def make_card (hash)
 
   # QRコード
   f = open("qrcode.png", "wb")
-  f.write(Base64.decode64(hash["qrcode"]))
+  f.write(Base64.decode64(hash["pic"]))
   f.close
 
   surface2 = Cairo::ImageSurface.from_png('qrcode.png')
@@ -199,26 +199,28 @@ def make_card (hash)
   return Base64.encode64(File.new("data.png").read)
 end
 
-post "/make" do
+post '/make', provides: :json do
 
-  halt 400 if params["family"].nil?
-  halt 400 if params["name"].nil?
-  halt 400 if params["school"].nil?
-  halt 400 if params["department"].nil?
-  halt 400 if params["mail"].nil?
-  halt 400 if params["tel"].nil?
+  # halt 400 if params["family"].nil?
+  # halt 400 if params["name"].nil?
+  # halt 400 if params["school"].nil?
+  # halt 400 if params["department"].nil?
+  # halt 400 if params["mail"].nil?
+  # halt 400 if params["tel"].nil?
 
-  hash = {"family" => params["family"], "name" => params["name"], "rubi_family" => params["rubi_family"], "rubi_name" => params["rubi_name"], "school" => params["school"], "department" => params["department"], "mail" => params["mail"], "tel" => params["tel"], "pic" => params["pic"], "back" => params["back"]}
+  # hash = {"family" => params["family"], "name" => params["name"], "rubi_family" => params["rubi_family"], "rubi_name" => params["rubi_name"], "school" => params["school"], "department" => params["department"], "mail" => params["mail"], "tel" => params["tel"], "pic" => params["pic"], "back" => params["back"]}
 
   if !validate(hash) 
     halt 400
   end
 
-  f = open("test.txt", "w")
-  f.write(hash)
+  input_data = JSON.parse request.body.read
+
+  f = open("input_data.txt", "w")
+  f.write(input_data)
   f.close
 
-  data = {"base64" => make_card(hash)}
+  data = {"data" => make_card(input_data)}
 
   data.to_json
 
