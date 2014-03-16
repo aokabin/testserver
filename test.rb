@@ -200,6 +200,7 @@ def make_card (hash)
 end
 
 post "/make" do
+
   halt 400 if params["family"].nil?
   halt 400 if params["name"].nil?
   halt 400 if params["school"].nil?
@@ -213,8 +214,16 @@ post "/make" do
     halt 400
   end
 
+  f = open("test.txt", "w")
+  f.write(hash)
+  f.close
+
   data = {"base64" => make_card(hash)}
 
   data.to_json
 
+end
+
+get "/" do
+  erb :make
 end
